@@ -3,11 +3,13 @@
 import { useTwitterDatabaseSync } from "@/hooks/useTwitterDatabaseSync";
 import { TgIcon } from "@/public/icons/TgIcon";
 import { useToast } from "@/hooks/use-toast";
+import { useMiniApp } from "@/hooks/useMiniApp";
 
 export default function TelegramBotJoin() {
   const { isAuthenticated, login, isProcessing, getTwitterHandle } =
     useTwitterDatabaseSync();
   const { toast } = useToast();
+  const { isMiniApp } = useMiniApp();
 
   const handleTelegramJoin = async () => {
     if (!isAuthenticated) {
@@ -53,13 +55,25 @@ export default function TelegramBotJoin() {
 
       // Redirect to telegram bot with encrypted handle as start parameter
       const telegramBotUrl = `https://t.me/dopamynfunbot?start=${encryptedText}`;
-      window.open(telegramBotUrl, "_blank");
-
-      toast({
-        title: "Redirecting to Telegram",
-        description: "Opening Telegram bot in a new tab...",
-        duration: 2000,
-      });
+      
+      // In mini app, window.open() doesn't work, use window.location.href instead
+      if (isMiniApp) {
+        // In mini app, navigate directly to the URL
+        window.location.href = telegramBotUrl;
+        toast({
+          title: "Opening Telegram",
+          description: "Redirecting to Telegram bot...",
+          duration: 2000,
+        });
+      } else {
+        // In regular browser, open in new tab
+        window.open(telegramBotUrl, "_blank");
+        toast({
+          title: "Redirecting to Telegram",
+          description: "Opening Telegram bot in a new tab...",
+          duration: 2000,
+        });
+      }
     } catch (error) {
       console.error("Failed to encrypt handle:", error);
       toast({
