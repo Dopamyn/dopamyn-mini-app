@@ -54,17 +54,6 @@ export default function MobileBottomNav() {
             <span className="text-sm font-medium">Campaigns</span>
           </Link>
 
-          {/* Earnings */}
-          <div
-            className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-colors min-w-0 flex-1 opacity-60 cursor-not-allowed"
-            )}
-            title="Coming Soon"
-          >
-            <DollarSign className="w-6 h-6 mb-2" />
-            <span className="text-sm font-medium">Earnings</span>
-          </div>
-
           {/* Login/Profile */}
           {isAuthenticated && user ? (
             <Link

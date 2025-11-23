@@ -27,8 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       default: "Dopamyn",
       template: "%s | Dopamyn",
     },
-    description:
-      "Slow Growth Ain't DOPE!",
+    description: "Slow Growth Ain't DOPE!",
     keywords:
       "Dopamyn, Dope, Web3, KOL, Influencer Marketing, Crypto, Blockchain, Decentralized, AI, Campaign Management, Mindshare",
     openGraph: {
@@ -36,8 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "en_US",
       url: domain,
       title: "Dopamyn",
-      description:
-        "Slow Growth Ain't DOPE!",
+      description: "Slow Growth Ain't DOPE!",
       siteName: "Dopamyn",
       images: [
         {
@@ -51,8 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: "Dopamyn",
-      description:
-        "Slow Growth Ain't DOPE!",
+      description: "Slow Growth Ain't DOPE!",
       creator: "@dopamyn_fun",
       site: "@dopamyn_fun",
       images: [ogImageUrl],
@@ -74,6 +71,16 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..1000&display=swap"
+          rel="stylesheet"
+        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-dope.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon-dope.svg" />

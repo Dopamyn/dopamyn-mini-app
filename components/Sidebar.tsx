@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, DollarSign, Trophy } from "lucide-react";
+import { User, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useUser } from "@/contexts/UserContext";
 import { useTwitterAuth } from "@/contexts/TwitterAuthContext";
@@ -29,13 +29,14 @@ export default function Sidebar() {
       active: true,
       showWhenAuthenticated: false,
     },
-    {
-      label: "My Earnings",
-      href: "/my-earnings",
-      icon: DollarSign,
-      active: false,
-      showWhenAuthenticated: true,
-    },
+    // Earnings tab hidden
+    // {
+    //   label: "My Earnings",
+    //   href: "/my-earnings",
+    //   icon: DollarSign,
+    //   active: false,
+    //   showWhenAuthenticated: true,
+    // },
   ].filter((item) => !item.showWhenAuthenticated || isAuthenticated);
 
   return (
