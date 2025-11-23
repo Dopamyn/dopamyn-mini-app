@@ -1,0 +1,870 @@
+{
+  "address": "5cukA1JtwmSH7gboD3X3VGfgqQ4KE6sN5PPNctKLhhh8",
+  "metadata": {
+    "name": "svm_contracts",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_supported_token",
+      "discriminator": [
+        109,
+        142,
+        133,
+        205,
+        240,
+        28,
+        197,
+        245
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "cancel_quest",
+      "discriminator": [
+        204,
+        232,
+        50,
+        68,
+        92,
+        169,
+        110,
+        198
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  108,
+                  111,
+                  98,
+                  97,
+                  108,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "quest",
+          "writable": true
+        },
+        {
+          "name": "escrow_account",
+          "writable": true
+        },
+        {
+          "name": "creator_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claim_remaining_reward",
+      "discriminator": [
+        15,
+        153,
+        152,
+        103,
+        222,
+        118,
+        105,
+        63
+      ],
+      "accounts": [
+        {
+          "name": "claimer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  108,
+                  111,
+                  98,
+                  97,
+                  108,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "quest",
+          "writable": true
+        },
+        {
+          "name": "escrow_account",
+          "writable": true
+        },
+        {
+          "name": "creator_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_quest",
+      "discriminator": [
+        112,
+        49,
+        32,
+        224,
+        255,
+        173,
+        5,
+        7
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "escrow_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "quest"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator_token_account",
+          "writable": true
+        },
+        {
+          "name": "quest",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "deadline",
+          "type": "i64"
+        },
+        {
+          "name": "max_winners",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "get_all_quests",
+      "discriminator": [
+        75,
+        125,
+        223,
+        9,
+        230,
+        81,
+        81,
+        186
+      ],
+      "accounts": [
+        {
+          "name": "global_state"
+        }
+      ],
+      "args": [],
+      "returns": {
+        "vec": "string"
+      }
+    },
+    {
+      "name": "get_quest_info",
+      "discriminator": [
+        7,
+        41,
+        213,
+        175,
+        90,
+        253,
+        96,
+        94
+      ],
+      "accounts": [
+        {
+          "name": "quest"
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": {
+          "name": "Quest"
+        }
+      }
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  108,
+                  111,
+                  98,
+                  97,
+                  108,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "supported_token_mints",
+          "type": {
+            "vec": "pubkey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pause",
+      "discriminator": [
+        211,
+        22,
+        221,
+        251,
+        74,
+        121,
+        193,
+        47
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_supported_token",
+      "discriminator": [
+        80,
+        206,
+        7,
+        134,
+        88,
+        218,
+        248,
+        219
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "send_reward",
+      "discriminator": [
+        207,
+        178,
+        178,
+        182,
+        38,
+        159,
+        69,
+        226
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  108,
+                  111,
+                  98,
+                  97,
+                  108,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "quest",
+          "writable": true
+        },
+        {
+          "name": "escrow_account",
+          "writable": true
+        },
+        {
+          "name": "winner"
+        },
+        {
+          "name": "winner_token_account",
+          "writable": true
+        },
+        {
+          "name": "reward_claimed",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  119,
+                  97,
+                  114,
+                  100,
+                  95,
+                  99,
+                  108,
+                  97,
+                  105,
+                  109,
+                  101,
+                  100
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "quest"
+              },
+              {
+                "kind": "account",
+                "path": "winner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "reward_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "set_owner",
+      "discriminator": [
+        72,
+        202,
+        120,
+        52,
+        77,
+        128,
+        96,
+        197
+      ],
+      "accounts": [
+        {
+          "name": "current_owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  108,
+                  111,
+                  98,
+                  97,
+                  108,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "new_owner",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "unpause",
+      "discriminator": [
+        169,
+        144,
+        4,
+        38,
+        10,
+        141,
+        188,
+        255
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "update_quest_status",
+      "discriminator": [
+        192,
+        254,
+        101,
+        177,
+        69,
+        244,
+        146,
+        119
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "global_state",
+          "writable": true
+        },
+        {
+          "name": "quest",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "is_active",
+          "type": "bool"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GlobalState",
+      "discriminator": [
+        163,
+        46,
+        74,
+        168,
+        216,
+        123,
+        133,
+        98
+      ]
+    },
+    {
+      "name": "Quest",
+      "discriminator": [
+        68,
+        78,
+        51,
+        23,
+        204,
+        27,
+        76,
+        132
+      ]
+    },
+    {
+      "name": "RewardClaimed",
+      "discriminator": [
+        46,
+        173,
+        37,
+        87,
+        152,
+        183,
+        221,
+        223
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "ContractPaused",
+      "msg": "Contract is paused"
+    },
+    {
+      "code": 6001,
+      "name": "UnsupportedTokenMint",
+      "msg": "Unsupported token mint"
+    },
+    {
+      "code": 6002,
+      "name": "UnauthorizedCancellation",
+      "msg": "Unauthorized cancellation"
+    },
+    {
+      "code": 6003,
+      "name": "QuestNotActive",
+      "msg": "Quest is not active"
+    },
+    {
+      "code": 6004,
+      "name": "QuestAlreadyCancelled",
+      "msg": "Quest already cancelled"
+    },
+    {
+      "code": 6005,
+      "name": "UnauthorizedStatusUpdate",
+      "msg": "Unauthorized status update"
+    },
+    {
+      "code": 6006,
+      "name": "UnauthorizedTokenModification",
+      "msg": "Unauthorized token modification"
+    },
+    {
+      "code": 6007,
+      "name": "TokenAlreadySupported",
+      "msg": "Token already supported"
+    },
+    {
+      "code": 6008,
+      "name": "TokenNotFound",
+      "msg": "Token not found"
+    },
+    {
+      "code": 6009,
+      "name": "UnauthorizedPauseAction",
+      "msg": "Unauthorized pause action"
+    },
+    {
+      "code": 6010,
+      "name": "AlreadyPaused",
+      "msg": "Already paused"
+    },
+    {
+      "code": 6011,
+      "name": "AlreadyUnpaused",
+      "msg": "Already unpaused"
+    },
+    {
+      "code": 6012,
+      "name": "UnauthorizedRewardAction",
+      "msg": "Unauthorized reward action"
+    },
+    {
+      "code": 6013,
+      "name": "InsufficientRewardBalance",
+      "msg": "Insufficient reward balance"
+    },
+    {
+      "code": 6014,
+      "name": "MaxWinnersReached",
+      "msg": "Max winners limit reached"
+    },
+    {
+      "code": 6015,
+      "name": "AlreadyRewarded",
+      "msg": "Winner has already been rewarded"
+    },
+    {
+      "code": 6016,
+      "name": "UnauthorizedWithdrawal",
+      "msg": "Unauthorized withdrawal"
+    },
+    {
+      "code": 6017,
+      "name": "NoTokensToWithdraw",
+      "msg": "No tokens to withdraw"
+    },
+    {
+      "code": 6018,
+      "name": "WithdrawalTooEarly",
+      "msg": "Must wait 1 week after quest deadline"
+    },
+    {
+      "code": 6019,
+      "name": "MissingAssociatedTokenAccount",
+      "msg": "Missing associated token account (ATA) for the provided owner/mint. Please create the ATA before sending rewards."
+    }
+  ],
+  "types": [
+    {
+      "name": "GlobalState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "paused",
+            "type": "bool"
+          },
+          {
+            "name": "supported_token_mints",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "quest_count",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Quest",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "escrow_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "deadline",
+            "type": "i64"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "total_winners",
+            "type": "u32"
+          },
+          {
+            "name": "total_reward_distributed",
+            "type": "u64"
+          },
+          {
+            "name": "max_winners",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RewardClaimed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "quest",
+            "type": "pubkey"
+          },
+          {
+            "name": "winner",
+            "type": "pubkey"
+          },
+          {
+            "name": "reward_amount",
+            "type": "u64"
+          },
+          {
+            "name": "claimed",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ]
+}

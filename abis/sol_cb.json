@@ -1,0 +1,272 @@
+{
+  "version": "0.1.0",
+  "name": "sol_cb",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        { "name": "owner", "isMut": true, "isSigner": true },
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "allowedTokens", "type": { "vec": "publicKey" } },
+        { "name": "tokenDecimals", "type": "bytes" }
+      ]
+    },
+    {
+      "name": "createNewCampaign",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "creator", "isMut": true, "isSigner": true },
+        { "name": "tokenMint", "isMut": false, "isSigner": false },
+        { "name": "campaign", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "selectedKol", "type": "publicKey" },
+        { "name": "offeringAmount", "type": "u64" },
+        { "name": "promotionEndsIn", "type": "i64" },
+        { "name": "offerEndsIn", "type": "i64" }
+      ]
+    },
+    {
+      "name": "updateCampaign",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "creator", "isMut": true, "isSigner": true },
+        { "name": "campaign", "isMut": true, "isSigner": false },
+        { "name": "tokenMint", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "selectedKol", "type": "publicKey" },
+        { "name": "promotionEndsIn", "type": "i64" },
+        { "name": "offerEndsIn", "type": "i64" },
+        { "name": "newAmountOffered", "type": "u64" }
+      ]
+    },
+    {
+      "name": "discardProjectCampaign",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "creator", "isMut": true, "isSigner": true },
+        { "name": "campaign", "isMut": true, "isSigner": false },
+        { "name": "campaignTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "creatorTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "tokenMint", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": []
+    },
+    {
+      "name": "acceptProjectCampaign",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "kol", "isMut": true, "isSigner": true },
+        { "name": "campaign", "isMut": true, "isSigner": false }
+      ],
+      "args": []
+    },
+    {
+      "name": "fulfilProjectCampaign",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "owner", "isMut": true, "isSigner": true },
+        { "name": "campaign", "isMut": true, "isSigner": false },
+        { "name": "campaignTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "kolTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "ownerTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "tokenMint", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": []
+    },
+    {
+      "name": "createOpenCampaign",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "creator", "isMut": true, "isSigner": true },
+        { "name": "tokenMint", "isMut": false, "isSigner": false },
+        { "name": "openCampaign", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "promotionEndsIn", "type": "i64" },
+        { "name": "poolAmount", "type": "u64" }
+      ]
+    },
+    {
+      "name": "completeOpenCampaign",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "owner", "isMut": true, "isSigner": true },
+        { "name": "openCampaign", "isMut": true, "isSigner": false },
+        { "name": "campaignTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "ownerTokenAccount", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "isFulfilled", "type": "bool" }]
+    },
+    {
+      "name": "addAllowedToken",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "owner", "isMut": true, "isSigner": true }
+      ],
+      "args": [
+        { "name": "tokenMint", "type": "publicKey" },
+        { "name": "tokenDecimal", "type": "u8" }
+      ]
+    },
+    {
+      "name": "removeAllowedToken",
+      "accounts": [
+        { "name": "marketplaceState", "isMut": true, "isSigner": false },
+        { "name": "owner", "isMut": true, "isSigner": true }
+      ],
+      "args": [{ "name": "tokenMint", "type": "publicKey" }]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Campaign",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "id", "type": { "array": ["u8", 4] } },
+          { "name": "counter", "type": "u32" },
+          { "name": "createdAt", "type": "i64" },
+          { "name": "creatorAddress", "type": "publicKey" },
+          { "name": "tokenMint", "type": "publicKey" },
+          { "name": "selectedKol", "type": "publicKey" },
+          { "name": "offerEndsIn", "type": "i64" },
+          { "name": "promotionEndsIn", "type": "i64" },
+          { "name": "amountOffered", "type": "u64" },
+          { "name": "campaignStatus", "type": { "defined": "CampaignStatus" } }
+        ]
+      }
+    },
+    {
+      "name": "OpenCampaign",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "id", "type": { "array": ["u8", 4] } },
+          { "name": "counter", "type": "u32" },
+          { "name": "createdAt", "type": "i64" },
+          { "name": "creatorAddress", "type": "publicKey" },
+          { "name": "tokenMint", "type": "publicKey" },
+          { "name": "promotionEndsIn", "type": "i64" },
+          { "name": "poolAmount", "type": "u64" },
+          {
+            "name": "campaignStatus",
+            "type": { "defined": "OpenCampaignStatus" }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MarketplaceState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "owner", "type": "publicKey" },
+          { "name": "campaignCounter", "type": "u32" },
+          { "name": "allowedTokens", "type": { "vec": "publicKey" } },
+          { "name": "tokenDecimals", "type": "bytes" }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "CampaignStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          { "name": "Open" },
+          { "name": "Accepted" },
+          { "name": "Fulfilled" },
+          { "name": "Unfulfilled" },
+          { "name": "Discarded" }
+        ]
+      }
+    },
+    {
+      "name": "OpenCampaignStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          { "name": "Published" },
+          { "name": "Fulfilled" },
+          { "name": "Discarded" }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "CampaignUpdated",
+      "fields": [
+        {
+          "name": "campaignId",
+          "type": { "array": ["u8", 4] },
+          "index": false
+        },
+        { "name": "updatedBy", "type": "publicKey", "index": false }
+      ]
+    },
+    {
+      "name": "CampaignAccepted",
+      "fields": [
+        {
+          "name": "campaignId",
+          "type": { "array": ["u8", 4] },
+          "index": false
+        },
+        { "name": "acceptedBy", "type": "publicKey", "index": false }
+      ]
+    },
+    {
+      "name": "CampaignFulfilled",
+      "fields": [
+        { "name": "campaignId", "type": { "array": ["u8", 4] }, "index": false }
+      ]
+    }
+  ],
+  "errors": [
+    { "code": 6000, "name": "Unauthorized", "msg": "Unauthorized access" },
+    {
+      "code": 6001,
+      "name": "InvalidCampaignStatus",
+      "msg": "Invalid campaign status"
+    },
+    { "code": 6002, "name": "InvalidKolAddress", "msg": "Invalid KOL address" },
+    { "code": 6003, "name": "CampaignExpired", "msg": "Campaign has expired" },
+    {
+      "code": 6004,
+      "name": "InvalidTimeParameters",
+      "msg": "Invalid time parameters"
+    },
+    { "code": 6005, "name": "InvalidAmount", "msg": "Invalid amount" },
+    {
+      "code": 6006,
+      "name": "InsufficientFunds",
+      "msg": "Insufficient funds for transfer"
+    },
+    { "code": 6007, "name": "InvalidParameters", "msg": "Invalid parameters" },
+    { "code": 6008, "name": "TooManyTokens", "msg": "Too many tokens" },
+    {
+      "code": 6009,
+      "name": "InvalidOpenCampaignStatus",
+      "msg": "Invalid open campaign status"
+    },
+    {
+      "code": 6010,
+      "name": "TokenAlreadyAllowed",
+      "msg": "Token already allowed"
+    },
+    { "code": 6011, "name": "TokenNotFound", "msg": "Token not found" }
+  ]
+}

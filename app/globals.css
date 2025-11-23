@@ -1,0 +1,498 @@
+@font-face {
+  font-family: "seasonVF";
+  src: url("/public/fonts/SeasonVFTRIALVF.ttf") format("ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "seasonMix";
+  src: url("/public/fonts/SeasonMixTRIAL-Medium.ttf") format("ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "seasonSansMedium";
+  src: url("/public/fonts/SeasonSansTRIAL-Medium.ttf") format("ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "seasonSansSemiBold";
+  src: url("/public/fonts/SeasonSansTRIAL-SemiBold.ttf") format("ttf");
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slow-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes border-line {
+  0% {
+    top: -9px;
+    left: -8px;
+    width: 10px;
+    height: 10px;
+  }
+  35% {
+    top: -9px;
+    left: calc(100% - 1px);
+    width: 10px;
+    height: 10px;
+  }
+  50% {
+    top: calc(100% - 1px);
+    left: calc(100% - 1px);
+    width: 10px;
+    height: 10px;
+  }
+  85% {
+    top: calc(100% - 1px);
+    left: -9px;
+    width: 10px;
+    height: 10px;
+  }
+  100% {
+    top: -9px;
+    left: -9px;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.02) 8%,
+    rgba(255, 255, 255, 0.05) 18%,
+    rgba(255, 255, 255, 0.02) 33%
+  );
+  background-size: 1000px 100%;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 4s linear infinite;
+}
+
+.animate-border-line {
+  animation: border-line 3s linear infinite;
+}
+
+@keyframes shining {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shining {
+  background: linear-gradient(90deg, #1a1a1a 0%, #a9f0df 50%, #1a1a1a 100%);
+  background-size: 200% 100%;
+  animation: shining 1.5s infinite linear;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: translateY(-50px) scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(10px) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes shining-text {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shining-text {
+  background: linear-gradient(
+    90deg,
+    #bb0000 0%,
+    #ffffff 50%,
+    #bb0000 100%
+  ); /* Using brighter colors for text */
+  background-size: 200% 100%;
+  animation: shining-text 1.5s infinite linear;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 152 100% 42.5%; /* TrendSage Green */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 152 100% 42.5%; /* TrendSage Green */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --border-error: 0 84% 60%; /* Red border for errors */
+    --border-success: 152 100% 42.5%; /* Green border for success */
+    --border-warning: 45 93% 47%; /* Yellow border for warnings */
+    --ring: 152 100% 42.5%; /* TrendSage Green */
+    --chart-1: 152 100% 42.5%; /* TrendSage Green */
+    --chart-2: 152 80% 35%;
+    --chart-3: 152 60% 28%;
+    --chart-4: 152 40% 21%;
+    --chart-5: 152 20% 14%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 152 100% 42.5%; /* TrendSage Green */
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 152 20% 95%;
+    --sidebar-accent-foreground: 152 100% 42.5%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 152 100% 42.5%; /* TrendSage Green */
+  }
+  .dark {
+    --background: 220 27% 5%; /* Dark gray-900 */
+    --foreground: 0 0% 98%;
+    --card: 220 15% 12%; /* Much lighter for better contrast */
+    --card-foreground: 0 0% 98%;
+    --popover: 220 15% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 100% 75%; /* Salmon Orange #FF8080 */
+    --primary-foreground: 220 27% 5%;
+    --secondary: 220 15% 15%; /* Lighter for better visibility */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 15% 15%; /* Lighter for better visibility */
+    --muted-foreground: 0 0% 65%; /* Much more readable text */
+    --accent: 0 100% 75%; /* Salmon Orange #FF8080 */
+    --accent-foreground: 220 27% 5%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 10% 30%; /* Much more visible - aggressive increase */
+    --input: 220 15% 18%; /* Much more visible - aggressive increase */
+    --border-error: 0 84% 60%; /* Red border for errors */
+    --border-success: 152 100% 42.5%; /* Green border for success */
+    --border-warning: 45 93% 47%; /* Yellow border for warnings */
+    --ring: 0 100% 75%; /* Salmon Orange #FF8080 */
+    --chart-1: 0 100% 75%; /* Salmon Orange */
+    --chart-2: 0 90% 70%;
+    --chart-3: 0 80% 65%;
+    --chart-4: 0 70% 60%;
+    --chart-5: 0 60% 55%;
+    --sidebar-background: 220 15% 12%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 0 100% 75%; /* Salmon Orange */
+    --sidebar-primary-foreground: 220 27% 5%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 220 10% 30%;
+    --sidebar-ring: 0 100% 75%; /* Salmon Orange */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: "seasonVF", "seasonMix", "seasonSansMedium",
+      "seasonSansSemiBold";
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .card-trendsage {
+    @apply rounded-xl p-6 shadow-sm border border-tertiary-text bg-secondary-bg/80
+         backdrop-blur-sm hover:border-blue-text/30 transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-blue-btn text-primary-text
+         px-6 py-3 rounded-xl font-semibold
+         hover:bg-blue-text active:bg-blue-text transition-all duration-200
+         shadow-lg hover:shadow-xl hover:shadow-accent-brand/25;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-bg text-primary-text border border-blue-text/30
+         px-6 py-3 rounded-xl font-semibold
+         hover:bg-tertiary-bg hover:border-blue-text/50 transition-all duration-200
+         shadow-md hover:shadow-lg;
+  }
+
+  .btn-primarynew {
+    @apply bg-light-primary text-dark-primary
+         px-4 py-2 font-semibold
+         hover:bg-light-secondary active:bg-light-secondary transition-all duration-200
+         shadow-lg hover:shadow-xl hover:shadow-light-secondary/25;
+  }
+
+  .btn-secondarynew {
+    @apply bg-transparent text-light-tertiary border border-light-tertiary
+         px-6 py-2  font-semibold 
+          hover:border-light-secondary hover:text-light-secondary transition-all duration-200
+         shadow-md hover:shadow-lg;
+  }
+
+  /* Compact CTA variants for tables/toolbars */
+  .btn-primarynew-sm {
+    @apply bg-accent-brand text-dark-primary inline-flex items-center justify-center
+         px-4 py-2 text-sm font-semibold rounded-md
+         hover:bg-light-tertiary active:bg-light-tertiary transition-all duration-200 shadow-md;
+  }
+
+  .btn-secondarynew-sm {
+    @apply bg-transparent text-light-tertiary border border-light-tertiary inline-flex items-center justify-center
+         px-4 py-2 text-sm font-semibold rounded-md
+         hover:border-light-primary hover:text-light-primary transition-all duration-200 shadow;
+  }
+
+  .accent-trendsage {
+    @apply text-accent-brand;
+  }
+
+  .bg-trendsage {
+    @apply bg-accent-brand;
+  }
+
+  .border-trendsage {
+    @apply border-accent-brand;
+  }
+
+  .ring-trendsage {
+    @apply ring-accent-brand;
+  }
+
+  .focus-trendsage {
+    @apply focus:ring-2 focus:ring-accent-brand focus:border-accent-brand;
+  }
+
+  /* Global border utilities */
+  .border-error {
+    @apply border-border-error;
+  }
+
+  .border-success {
+    @apply border-border-success;
+  }
+
+  .border-warning {
+    @apply border-border-warning;
+  }
+
+  .focus-error {
+    @apply focus:ring-2 focus:ring-border-error focus:border-border-error;
+  }
+
+  .focus-success {
+    @apply focus:ring-2 focus:ring-border-success focus:border-border-success;
+  }
+
+  .focus-warning {
+    @apply focus:ring-2 focus:ring-border-warning focus:border-border-warning;
+  }
+
+  /* Remove old pastel classes - no longer needed */
+
+  /* Standardized input styling in dark mode */
+  .dark input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  .dark textarea,
+  .dark select {
+    background-color: #1E2025 !important; /* Lighter, more visible dark gray */
+    border-color: #2D313A !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: #F1F5F9 !important; /* Bright text */
+  }
+  
+  .dark input:focus:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  .dark textarea:focus,
+  .dark select:focus {
+    background-color: #23262E !important;
+    border-color: #FF8080 !important;
+    box-shadow: 0 0 0 2px rgba(255, 128, 128, 0.2);
+  }
+  
+  .dark input:hover:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not(:focus),
+  .dark textarea:hover:not(:focus),
+  .dark select:hover:not(:focus) {
+    border-color: #3F444E !important;
+    background-color: #23262E !important;
+  }
+  
+  /* Placeholder color */
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: #6B7280 !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-tertiary;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-dark-quaternary;
+}
+
+/* Custom scrollbar for quest modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(45, 59, 57, 0.3);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-dark-tertiary;
+  border-radius: 4px;
+  border: 1px solid rgba(20, 20, 20, 0.3);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-dark-quaternary;
+}
+
+/* Make calendar icon white and position it properly */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  padding: 4px;
+}
+
+/* Ensure datetime input has proper padding for icon */
+input[type="datetime-local"] {
+  padding-right: 40px !important;
+  position: relative;
+}
+
+/* Make time input clock icon white and position it on the right */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 2px;
+  opacity: 0.7;
+}
+
+/* Ensure time input has proper padding for icon */
+input[type="time"] {
+  padding-right: 32px !important;
+  position: relative;
+}
+
+/* Compact form sections */
+.quest-form-section {
+  @apply space-y-3 p-4 rounded-lg border border-border bg-card/50;
+}
+
+.quest-form-section h3 {
+  @apply text-sm font-semibold mb-2;
+}
+
+/* Reduce card padding in quest creation */
+.quest-card {
+  @apply p-4 space-y-4;
+}
+
+.gradient-border {
+  border: 2px solid transparent; /* thickness of border */
+  border-radius: 12px; /* optional */
+  border-image: linear-gradient(
+      270deg,
+      rgba(164, 206, 252, 0.4) 0%,
+      rgba(255, 255, 255, 0.032) 50%,
+      rgba(164, 206, 252, 0.4) 100%
+    )
+    1;
+}
